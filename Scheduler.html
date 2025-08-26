@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scheduler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #101111;
+      color: #eee;
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #444;
+    }
+    .days label {
+      margin-right: 12px;
+      cursor: pointer;
+    }
+    button {
+      background: #4fc3f7;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 15px;
+      width: 100%;
+    }
+    button:hover {
+      background: #039be5;
+      color: #fff;
+    }
+    #status {
+      margin-top: 15px;
+      font-style: italic;
+      color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <h2>Solenoid Valve Scheduler</h2>
+
+  <div>
+    <label>Repeat on:</label>
+    <div class="days">
+      <label><input type="radio" name="day" value="Mo"> Mo</label>
+      <label><input type="radio" name="day" value="Tue" checked> Tue</label>
+      <label><input type="radio" name="day" value="Wed"> Wed</label>
+      <label><input type="radio" name="day" value="Thu"> Thu</label>
+      <label><input type="radio" name="day" value="Fri"> Fri</label>
+      <label><input type="radio" name="day" value="Sat"> Sat</label>
+      <label><input type="radio" name="day" value="Sun"> Sun</label>
+    </div>
+  </div>
+
+  <div style="margin-top: 12px;">
+    <label>Start Time:</label>
+    <input type="time" id="start-time" value="09:00" />
+  </div>
+  <div style="margin-top: 12px;">
+    <label>End Time:</label>
+    <input type="time" id="end-time" value="17:00" />
+  </div>
+
+  <button id="add-btn">➕ Add Schedule</button>
+
+  <div id="status">Waiting for input...</div>
+
+  <script>
+    document.getElementById("add-btn").onclick = () => {
+      const day = document.querySelector('input[name="day"]:checked').value;
+      const start = document.getElementById("start-time").value;
+      const end = document.getElementById("end-time").value;
+
+      if (!day || !start || !end) {
+        document.getElementById("status").textContent = "Please select day and times.";
+        return;
+      }
+
+      document.getElementById("status").textContent = `Scheduled on ${day} from ${start} to ${end}`;
+    };
+  </script>
+</body>
+</html>
